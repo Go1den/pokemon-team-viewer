@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/main.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div>Enter a Pokemon's Pokedex number and its image will appear below.<br>Pokemon under #100 must have leading zeroes.</div>
+                <br>Background Color: <input type="color" id="color1" onchange="setBG()">
+        <br>
+        <br>
+        <table id="table1">
+            <tr>
+                <td class="input">
+                    <input type="number" id="input1" onchange="refresh(1)">
+                </td>
+                <td class="input">
+                    <input type="number" id="input2" onchange="refresh(2)">
+                </td>
+                <td class="input">
+                    <input type="number" id="input3" onchange="refresh(3)">
+                </td>
+                <td class="input">
+                    <input type="number" id="input4" onchange="refresh(4)">
+                </td>
+                <td class="input">
+                    <input type="number" id="input5" onchange="refresh(5)">
+                </td>
+                <td class="input">
+                    <input type="number" id="input6" onchange="refresh(6)">
+                </td>
+            </tr>
+            <tr class="pokemon">
+                <td id="pokemon1"></td>
+                <td id="pokemon2"></td>
+                <td id="pokemon3"></td>
+                <td id="pokemon4"></td>
+                <td id="pokemon5"></td>
+                <td id="pokemon6"></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+body {
+    background-color: #222222;
+    color: white;
+}
+
+input {
+    width: 150px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+table, tr, td {   
+    padding: 0px;
+}
+
+.input {
+    background-color: #222222;
+}
