@@ -2,7 +2,7 @@ window.addEventListener("load", (event) => {
     setupPokemonDropdowns();
     setupItemDropdowns();
     decodeURL();
-    refreshAllNoBg();
+    refreshAll();
 });
 
 function setupPokemonDropdowns() {
@@ -23,15 +23,6 @@ function setupItemDropdowns() {
     setupItemDropdown(6);
 }
 
-function refreshAllNoBg() {
-    refresh(1);
-    refresh(2);
-    refresh(3);
-    refresh(4);
-    refresh(5);
-    refresh(6);
-}
-
 function refreshAll() {
     refresh(1);
     refresh(2);
@@ -39,7 +30,9 @@ function refreshAll() {
     refresh(4);
     refresh(5);
     refresh(6);
-    setBG();
+    if (bgAppliedAtLeastOnce) {
+        setBG();
+    }
 }
 
 function refreshURL() {
@@ -81,9 +74,12 @@ function refresh(num) {
     refreshURL();
 }
 
+let bgAppliedAtLeastOnce = false; 
+
 function setBG() {
-        let name = document.getElementById("color1").value;
-        document.getElementById("displayTable").style.backgroundColor = name;
+    bgAppliedAtLeastOnce = true;
+    let name = document.getElementById("color1").value;
+    document.getElementById("displayTable").style.backgroundColor = name;
 }
 
 function flip(num) {
