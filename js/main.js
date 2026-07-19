@@ -2,7 +2,7 @@ window.addEventListener("load", (event) => {
     setupPokemonDropdowns();
     setupItemDropdowns();
     decodeURL();
-    refreshAll();
+    refreshAllNoBg();
 });
 
 function setupPokemonDropdowns() {
@@ -21,6 +21,15 @@ function setupItemDropdowns() {
     setupItemDropdown(4);
     setupItemDropdown(5);
     setupItemDropdown(6);
+}
+
+function refreshAllNoBg() {
+    refresh(1);
+    refresh(2);
+    refresh(3);
+    refresh(4);
+    refresh(5);
+    refresh(6);
 }
 
 function refreshAll() {
@@ -73,8 +82,8 @@ function refresh(num) {
 }
 
 function setBG() {
-    let name = document.getElementById("color1").value;
-    document.getElementById("displayTable").style.backgroundColor = name;
+        let name = document.getElementById("color1").value;
+        document.getElementById("displayTable").style.backgroundColor = name;
 }
 
 function flip(num) {
