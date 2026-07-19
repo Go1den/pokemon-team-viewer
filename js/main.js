@@ -23,7 +23,7 @@ function refresh(num) {
 function setBG() {
     let name = document.getElementById("color1").value;
     console.log(name);
-    document.getElementById("table1").style.backgroundColor = name;
+    document.getElementById("displayTable").style.backgroundColor = name;
 }
 
 function flip(num) {
