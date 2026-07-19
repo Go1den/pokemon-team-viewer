@@ -156,8 +156,8 @@ function fromBase62(str) {
 function encodePair(pID, itemID) {
     pID = isNaN(pID) ? 0 : pID;
     itemID = isNaN(itemID) ? 0 : itemID;
-    pID = Math.min(Math.max(pID, 0), 1026);
-    itemID = Math.min(Math.max(itemID, 0), 146);
+    pID = Math.min(Math.max(pID, 0), globalPokemon.length);
+    itemID = Math.min(Math.max(itemID, 0), globalItems.length);
     const packed = (pID << 8) | itemID;
     let encoded = toBase62(packed);
     while (encoded.length < 3) {
