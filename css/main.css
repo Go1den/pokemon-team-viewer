@@ -19,3 +19,7 @@ table, tr, td {
 .input {
     background-color: #222222;
 }
+
+.flipped {
+    transform: rotateY(-180deg);
+}
