@@ -34,7 +34,6 @@ function refreshAll() {
 }
 
 function refreshURL() {
-    console.log("sup");
     let urlEl = document.getElementById("url");
     urlEl.value = getURL();
 }
@@ -52,9 +51,6 @@ function refresh(num) {
 
     let imgSource = "https://www.serebii.net/pokemonhome/pokemon/" + dexNum + ".png";
     let itemSelect = document.getElementById("item" + num);
-    console.log(itemSelect.selectedIndex);
-    console.log(itemSelect.value);
-    console.log(itemSelect.options.length);
     let itemName = itemSelect.options[itemSelect.selectedIndex].text;
     let itemSource = "https://www.serebii.net/itemdex/sprites/" + itemName.replace(/\s/g, "").toLowerCase() + ".png";
     let result = '<div class="imagesDiv"><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
