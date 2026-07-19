@@ -3,7 +3,7 @@ body {
     color: white;
 }
 
-input {
+input, datalist {
     width: 150px;
 }
 

@@ -1,7 +1,17 @@
 window.addEventListener("load", (event) => {
-    refreshAll();
+    setupPokemonDropdowns();
     setupItemDropdowns();
+    refreshAll();
 });
+
+function setupPokemonDropdowns() {
+    setupPokemonDropdown(1);
+    setupPokemonDropdown(2);
+    setupPokemonDropdown(3);
+    setupPokemonDropdown(4);
+    setupPokemonDropdown(5);
+    setupPokemonDropdown(6);
+}
 
 function setupItemDropdowns() {
     setupItemDropdown(1);
@@ -23,7 +33,9 @@ function refreshAll() {
 }
 
 function refresh(num) {
-    let dexNum = document.getElementById("input" + num).value;
+    let select = document.getElementById("input" + num);
+    let pokemon = select.options[select.selectedIndex].text;
+    let dexNum = globalPokemon.indexOf(pokemon) + 1;
     let el = document.getElementById("pokemon" + num);
     if (dexNum < 10) {
         dexNum = "00" + dexNum;
@@ -33,7 +45,6 @@ function refresh(num) {
     let imgSource = "https://www.serebii.net/pokemonhome/pokemon/" + dexNum + ".png";
     let itemName = document.getElementById("item" + num).value;
     let itemSource = "https://www.serebii.net/itemdex/sprites/" + itemName.replace(/\s/g, "").toLowerCase() + ".png";
-    console.log(itemSource);
     let result = '<div class="imagesDiv"><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
     if (itemName !== "No Item" && itemName !== "") {
         result += '<img class="itemimage" id="itemimage' + num + '" src="' + itemSource + '" />';
@@ -46,7 +57,6 @@ function refresh(num) {
 
     let itemImageEl = document.getElementById("itemimage" + num);
     if (itemImageEl !== null) {
-        console.log(itemImageEl);
         itemImageEl.style.width = document.getElementById("itemSize").value;
         itemImageEl.style.height = document.getElementById("itemSize").value;
     }
@@ -54,7 +64,6 @@ function refresh(num) {
 
 function setBG() {
     let name = document.getElementById("color1").value;
-    console.log(name);
     document.getElementById("displayTable").style.backgroundColor = name;
 }
 
@@ -101,4 +110,16 @@ function setupItemDropdown(num) {
         }
     }
     dropdown.innerHTML = options;
+}
+
+function setupPokemonDropdown(num) {
+    let sortedPokemon = globalPokemon.toSorted();
+    let datalist = document.getElementById("input" + num);
+    let options = '<option selected disabled value="---">Select a Pokemon</option>';
+    let index = 1;
+    for (const pokemon of sortedPokemon) {
+        options += '<option value="' + index + '">' + pokemon + '</option>';
+        index++;
+    }
+    datalist.innerHTML = options; 
 }
