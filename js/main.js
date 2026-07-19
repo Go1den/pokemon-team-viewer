@@ -1,7 +1,16 @@
 window.addEventListener("load", (event) => {
     refreshAll();
-    setBG();
+    setupItemDropdowns();
 });
+
+function setupItemDropdowns() {
+    setupItemDropdown(1);
+    setupItemDropdown(2);
+    setupItemDropdown(3);
+    setupItemDropdown(4);
+    setupItemDropdown(5);
+    setupItemDropdown(6);
+}
 
 function refreshAll() {
     refresh(1);
@@ -10,6 +19,7 @@ function refreshAll() {
     refresh(4);
     refresh(5);
     refresh(6);
+    setBG();
 }
 
 function refresh(num) {
@@ -21,7 +31,14 @@ function refresh(num) {
         dexNum = "0" + dexNum;
     }
     let imgSource = "https://www.serebii.net/pokemonhome/pokemon/" + dexNum + ".png";
-    el.innerHTML = '<img id="image' + num + '" src="' + imgSource + '" />';
+    let itemName = document.getElementById("item" + num).value;
+    let itemSource = "https://www.serebii.net/itemdex/sprites/" + itemName.replace(/\s/g, "").toLowerCase() + ".png";
+    console.log(itemSource);
+    let result = '<div><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
+    if (itemName !== "No Item" && itemName !== "") {
+        result += '<img class="itemimage" id="itemimage' + num + '" src="' + itemSource + '" />';
+    }
+    el.innerHTML = result + '</div>';
 
     let imageEl = document.getElementById("image" + num);
     imageEl.style.width = document.getElementById("imageSize").value;
@@ -64,4 +81,17 @@ function setOrientation() {
     }
     oldTable.parentNode.replaceChild(newTable, oldTable);
     refreshAll();
+}
+
+function setupItemDropdown(num) {
+    let dropdown = document.getElementById("item" + num);
+    let options = "";
+    for (const item of globalItems) {
+        if (item === "No Item") {
+            options += "<option selected>" + item + "</option>";
+        } else {    
+            options += "<option>" + item + "</option>";
+        }
+    }
+    dropdown.innerHTML = options;
 }

@@ -23,3 +23,18 @@ table, tr, td {
 .flipped {
     transform: rotateY(-180deg);
 }
+
+div {
+    position: relative;
+    display: inline-block; /* changed from inline */
+    width: 150px; /* match image width */
+    height: 150px; /* match image height */
+}
+
+.itemImage {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px; /* specify size for overlay */
+    height: 50px;
+}
