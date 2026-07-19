@@ -5,7 +5,14 @@
     </head>
     <body>
         <div>Enter a Pokemon's Pokedex number and its image will appear below.</div>
-                <br>Background Color: <input type="color" id="color1" onchange="setBG()">
+        <br>
+        Background Color: <input type="color" id="color1" onchange="setBG()">&nbsp;
+        Orientation: <select id="orientation" onchange="setOrientation()">
+            <option value="1x6">1x6</option>
+            <option value="2x3">2x3</option>
+            <option value="3x2">3x2</option>
+            <option value="6x1" selected>6x1</option>
+        </select>
         <br>
         <br>
         <table id="setupTable">
@@ -73,14 +80,16 @@
         <br>
         <br>
         <table id="displayTable">
-            <tr class="pokemon">
-                <td id="pokemon1"></td>
-                <td id="pokemon2"></td>
-                <td id="pokemon3"></td>
-                <td id="pokemon4"></td>
-                <td id="pokemon5"></td>
-                <td id="pokemon6"></td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td id="pokemon1"></td>
+                    <td id="pokemon2"></td>
+                    <td id="pokemon3"></td>
+                    <td id="pokemon4"></td>
+                    <td id="pokemon5"></td>
+                    <td id="pokemon6"></td>
+                </tr>
+            </tbody>
         </table>
     </body>
 </html>

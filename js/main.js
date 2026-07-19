@@ -1,12 +1,16 @@
 window.addEventListener("load", (event) => {
+    refreshAll();
+    setBG();
+});
+
+function refreshAll() {
     refresh(1);
     refresh(2);
     refresh(3);
     refresh(4);
     refresh(5);
     refresh(6);
-    setBG();
-});
+}
 
 function refresh(num) {
     let dexNum = document.getElementById("input" + num).value;
@@ -33,4 +37,27 @@ function flip(num) {
     } else {
         el.classList.add('flipped');
     }
+}
+
+function setOrientation() {
+    let orientation = document.getElementById("orientation").value;
+    let cols = Number(orientation.charAt(0));
+    let rows = Number(orientation.charAt(2));
+    let oldTable = document.getElementById("displayTable");
+    let result = '';
+    let newTable = document.createElement('table');
+    newTable.id = "displayTable";
+    let id = 1;
+    for (let i = 0; i < rows; i++) {
+        let tr = document.createElement('tr');
+        for (let j = 0; j < cols; j++) {
+            let td = document.createElement('td');
+            td.id = "pokemon" + id;
+            tr.appendChild(td);
+            id++;
+        }
+        newTable.appendChild(tr);
+    }
+    oldTable.parentNode.replaceChild(newTable, oldTable);
+    refreshAll();
 }
