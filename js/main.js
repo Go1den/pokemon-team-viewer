@@ -1,6 +1,7 @@
 window.addEventListener("load", (event) => {
     setupPokemonDropdowns();
     setupItemDropdowns();
+    decodeURL();
     refreshAll();
 });
 
@@ -32,6 +33,12 @@ function refreshAll() {
     setBG();
 }
 
+function refreshURL() {
+    console.log("sup");
+    let urlEl = document.getElementById("url");
+    urlEl.value = getURL();
+}
+
 function refresh(num) {
     let select = document.getElementById("input" + num);
     let pokemon = select.options[select.selectedIndex].text;
@@ -42,11 +49,16 @@ function refresh(num) {
     } else if (dexNum < 100) {
         dexNum = "0" + dexNum;
     }
+
     let imgSource = "https://www.serebii.net/pokemonhome/pokemon/" + dexNum + ".png";
-    let itemName = document.getElementById("item" + num).value;
+    let itemSelect = document.getElementById("item" + num);
+    console.log(itemSelect.selectedIndex);
+    console.log(itemSelect.value);
+    console.log(itemSelect.options.length);
+    let itemName = itemSelect.options[itemSelect.selectedIndex].text;
     let itemSource = "https://www.serebii.net/itemdex/sprites/" + itemName.replace(/\s/g, "").toLowerCase() + ".png";
     let result = '<div class="imagesDiv"><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
-    if (itemName !== "No Item" && itemName !== "") {
+    if (itemName !== "No Item" && itemName !== "" && itemName !== "0") {
         result += '<img class="itemimage" id="itemimage' + num + '" src="' + itemSource + '" />';
     }
     el.innerHTML = result + '</div>';
@@ -60,6 +72,8 @@ function refresh(num) {
         itemImageEl.style.width = document.getElementById("itemSize").value;
         itemImageEl.style.height = document.getElementById("itemSize").value;
     }
+
+    refreshURL();
 }
 
 function setBG() {
@@ -102,24 +116,91 @@ function setOrientation() {
 function setupItemDropdown(num) {
     let dropdown = document.getElementById("item" + num);
     let options = "";
+    let index = 0;
+
     for (const item of globalItems) {
-        if (item === "No Item") {
-            options += "<option selected>" + item + "</option>";
-        } else {    
-            options += "<option>" + item + "</option>";
-        }
+        options += '<option value="' + index + '">' + item + '</option>';
+        index++;
     }
+
     dropdown.innerHTML = options;
 }
 
 function setupPokemonDropdown(num) {
     let sortedPokemon = globalPokemon.toSorted();
     let datalist = document.getElementById("input" + num);
-    let options = '<option selected disabled value="---">Select a Pokemon</option>';
+    let options = '<option selected disabled value="0">Select a Pokemon</option>';
     let index = 1;
     for (const pokemon of sortedPokemon) {
         options += '<option value="' + index + '">' + pokemon + '</option>';
         index++;
     }
     datalist.innerHTML = options; 
+}
+
+const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+function toBase62(num) {
+    let result = '';
+    do {
+        result = BASE62[num % 62] + result;
+        num = Math.floor(num / 62);
+    } while (num > 0);
+    return result;
+}
+
+function fromBase62(str) {
+    let num = 0;
+    for (let i = 0; i < str.length; i++) {
+        num = num * 62 + BASE62.indexOf(str[i]);
+    }
+    return num;
+}
+
+function encodePair(pID, itemID) {
+    pID = isNaN(pID) ? 0 : pID;
+    itemID = isNaN(itemID) ? 0 : itemID;
+    pID = Math.min(Math.max(pID, 0), 1026);
+    itemID = Math.min(Math.max(itemID, 0), 139);
+    const packed = (pID << 8) | itemID;
+    let encoded = toBase62(packed);
+    while (encoded.length < 3) {
+        encoded = '0' + encoded;
+    }
+    return encoded;
+}
+
+function getURL() {
+    const pairs = [];
+    for (let i = 1; i <= 6; i++) {
+        let pID = parseInt(document.getElementById(`input${i}`).value, 10);
+        let itemID = parseInt(document.getElementById(`item${i}`).value, 10);
+        pairs.push(encodePair(pID, itemID));
+    }
+    const compactString = pairs.join('');
+    const baseUrl = "go1den.com/pokemon-team-viewer/";
+    const fullUrl = `${baseUrl}?data=${compactString}`;
+    return fullUrl;
+}
+
+function decodeURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('data')) {
+        const dataStr = urlParams.get('data');
+        const pairs = dataStr.match(/.{3}/g);
+        for (let i = 0; i < pairs.length; i++) {
+            const num = fromBase62(pairs[i]);
+            const pID = num >> 8;
+            const itemID = num & 0xFF;
+
+            document.getElementById(`input${i + 1}`).value = pID;
+            document.getElementById(`item${i + 1}`).value = itemID;
+        }
+    }
+}
+
+function copyToClipboard() {
+    let el = document.getElementById("url");
+    el.select();
+    document.execCommand("copy");
 }

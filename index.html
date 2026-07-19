@@ -22,6 +22,8 @@
         Item Size (Pixels): <input type="number" id="itemSize" onchange="refreshAll()" value="40">&nbsp;
         <br>
         <br>
+        Unique URL for this team: <input type="text" id="url" readonly>
+        <button id="clipboardButton" onclick="copyToClipboard()">Copy to Clipboard</button>
         <datalist id="pokemonDatalist"></datalist>
         <table id="setupTable">
             <tr>

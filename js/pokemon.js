@@ -839,7 +839,6 @@ const globalPokemon = [
   "Carkol",
   "Coalossal",
   "Applin",
-  "Flaaffy",
   "Flapple",
   "Appletun",
   "Silicobra",

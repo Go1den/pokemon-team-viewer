@@ -1,4 +1,5 @@
 const globalItems = [
+    "No Item",
     "Abomasite",
     "Absolite",
     "Aerodactylite",
@@ -88,7 +89,6 @@ const globalItems = [
     "Muscle Band",
     "Mystic Water",
     "Never-Melt Ice",
-    "No Item",
     "Occa Berry",
     "Oran Berry",
     "Passho Berry",

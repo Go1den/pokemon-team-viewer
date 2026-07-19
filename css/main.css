@@ -40,3 +40,7 @@ table, tr, td {
 select {
     width: 150px;
 }
+
+#url {
+    width: 450px;
+}
