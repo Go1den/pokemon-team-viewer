@@ -22,6 +22,10 @@ function refresh(num) {
     }
     let imgSource = "https://www.serebii.net/pokemonhome/pokemon/" + dexNum + ".png";
     el.innerHTML = '<img id="image' + num + '" src="' + imgSource + '" />';
+
+    let imageEl = document.getElementById("image" + num);
+    imageEl.style.width = document.getElementById("imageSize").value;
+    imageEl.style.height = document.getElementById("imageSize").value;
 }
 
 function setBG() {

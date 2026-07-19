@@ -4,7 +4,8 @@
         <script src="js/main.js" type="text/javascript"></script>
     </head>
     <body>
-        <div>Enter a Pokemon's Pokedex number and its image will appear below.</div>
+        <div>Enter a Pokemon's Pokedex number and its image will appear below.<br>
+        You can view your Pokedex numbers from the Check Summary screen in Pokemon Champions.</div>
         <br>
         Background Color: <input type="color" id="color1" onchange="setBG()">&nbsp;
         Orientation: <select id="orientation" onchange="setOrientation()">
@@ -12,7 +13,8 @@
             <option value="2x3">2x3</option>
             <option value="3x2">3x2</option>
             <option value="6x1" selected>6x1</option>
-        </select>
+        </select>&nbsp;
+        Image Size (Pixels): <input type="number" id="imageSize" onchange="refreshAll()" value="150">
         <br>
         <br>
         <table id="setupTable">
