@@ -34,7 +34,7 @@ function refresh(num) {
     let itemName = document.getElementById("item" + num).value;
     let itemSource = "https://www.serebii.net/itemdex/sprites/" + itemName.replace(/\s/g, "").toLowerCase() + ".png";
     console.log(itemSource);
-    let result = '<div><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
+    let result = '<div class="imagesDiv"><img class="pokemonimage" id="image' + num + '" src="' + imgSource + '" />';
     if (itemName !== "No Item" && itemName !== "") {
         result += '<img class="itemimage" id="itemimage' + num + '" src="' + itemSource + '" />';
     }
@@ -43,6 +43,13 @@ function refresh(num) {
     let imageEl = document.getElementById("image" + num);
     imageEl.style.width = document.getElementById("imageSize").value;
     imageEl.style.height = document.getElementById("imageSize").value;
+
+    let itemImageEl = document.getElementById("itemimage" + num);
+    if (itemImageEl !== null) {
+        console.log(itemImageEl);
+        itemImageEl.style.width = document.getElementById("itemSize").value;
+        itemImageEl.style.height = document.getElementById("itemSize").value;
+    }
 }
 
 function setBG() {

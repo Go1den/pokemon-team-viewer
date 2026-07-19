@@ -24,17 +24,19 @@ table, tr, td {
     transform: rotateY(-180deg);
 }
 
-div {
+.imagesDiv {
     position: relative;
-    display: inline-block; /* changed from inline */
-    width: 150px; /* match image width */
-    height: 150px; /* match image height */
+    display: inline-block;
 }
 
 .itemImage {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 50px; /* specify size for overlay */
+    width: 50px;
     height: 50px;
+}
+
+select {
+    width: 150px;
 }
