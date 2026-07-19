@@ -70,6 +70,7 @@ const globalItems = [
     "Kasib Berry",
     "King's Rock",
     "Leppa Berry",
+    "Leftovers",
     "Life Orb",
     "Light Ball",
     "Light Clay",
